@@ -16,5 +16,7 @@ deploy:
         content: $SSH_PRIVATE
         overwrite: true
     - bundle-install
+    - williamli/add-deploy-ssh-key:
+        keyname: SSH
     - cap:
         stage: production
