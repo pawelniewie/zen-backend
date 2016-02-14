@@ -22,6 +22,8 @@ deploy:
     - script:
         code: |
           ls -la
+    - bundle-install
+        binstubs: true
     - script:
         name: deploy with capistrano
         code: |
