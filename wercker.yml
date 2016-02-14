@@ -22,7 +22,7 @@ deploy:
     - script:
         code: |
           ls -la
-    - bundle-install
+    - bundle-install:
         binstubs: true
     - script:
         name: deploy with capistrano
