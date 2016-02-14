@@ -19,7 +19,9 @@ set :rails_env, 'production'
 set :branch, 'master'
 
 if ENV['PRIVATEKEY_PATH']
-  ssh_options[:keys] = [ENV["CAP_PRIVATE_KEY"]]
+	set :ssh_options, {
+  	keys: [ENV["CAP_PRIVATE_KEY"]]
+	}
 end
 
 # you can set custom ssh options
