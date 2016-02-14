@@ -20,7 +20,7 @@ set :branch, 'master'
 
 if ENV['PRIVATEKEY_PATH']
 	set :ssh_options, {
-  	keys: [ENV["CAP_PRIVATE_KEY"]]
+  	keys: [ENV["PRIVATEKEY_PATH"]]
 	}
 end
 
