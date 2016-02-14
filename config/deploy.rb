@@ -1,13 +1,19 @@
 # config valid only for Capistrano 3.2.x
 lock '3.4.0'
 
-set :application, 'zen'
-set :repo_url, 'git@github.com:pawelniewie/zen.git'
-set :repo_tree, 'database'
+set :application, 'zen-backend'
+set :repo_url, 'git@github.com:pawelniewie/zen-backend.git'
 set :git_shallow_clone, 1
 set :deploy_via, :remote_cache
 
-set :ssh_options, { :forward_agent => true }
+if ENV['PRIVATEKEY_PATH']
+	set :ssh_options, {
+  	keys: [ENV["PRIVATEKEY_PATH"]],
+  	forward_agent: true
+	}
+else
+	set :ssh_options, { :forward_agent => true }
+end
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/var/www/usezen.it'
