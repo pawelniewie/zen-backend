@@ -22,9 +22,7 @@ deploy:
     - script:
         code: |
           ls -la
-          ls -la bin
     - script:
-        cwd: database
         name: deploy with capistrano
         code: |
           bin/cap production deploy
