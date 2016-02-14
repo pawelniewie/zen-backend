@@ -16,4 +16,5 @@ deploy:
         content: $SSH_PRIVATE
         overwrite: true
     - bundle-install
-    - cap
+    - cap:
+        stage: production
