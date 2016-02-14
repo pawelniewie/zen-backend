@@ -1,0 +1,7 @@
+development:
+  RAILS_ENV:                development
+  DATABASE_URL:             postgres://zen:zen@localhost/zen
+
+production:
+  RAILS_ENV:                production
+  DATABASE_URL:             postgres://zen:wSDFGHWLAekjfeorjgu234kjdlfn@localhost/zen

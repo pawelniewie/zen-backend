@@ -1,0 +1,37 @@
+namespace :figaro do
+  desc "SCP transfer figaro configuration to the shared folder"
+  task :setup do
+    on roles(:app) do
+      upload! "config/application.yml", "#{shared_path}/application.yml", via: :scp
+    end
+  end
+
+  desc "Symlink application.yml to the release path"
+  task :symlink do
+    on roles(:app) do
+      execute "ln -sf #{fetch(:figaro_path)}/application.yml #{release_path}/config/application.yml"
+    end
+  end
+
+  desc "Run figaro:heroku"
+  task :heroku do
+    rake = fetch(:rake, 'rake')
+    rails_env = fetch(:rails_env, 'production')
+    app = fetch(:figaro_app, '')
+
+    run_locally do
+      if app == ''
+        rake "figaro:heroku RAILS_ENV=#{rails_env}"
+      else
+        rake "figaro:heroku[#{app}] RAILS_ENV=#{rails_env}"
+      end
+    end
+  end
+end
+
+namespace :load do
+  task :defaults do
+    set :figaro_path, -> { shared_path }
+    set :figaro_app, -> { fetch(:application, 'app') + '-' + fetch(:rails_env, 'production') }
+  end
+end

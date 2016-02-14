@@ -1,0 +1,25 @@
+box: ruby
+build:
+  steps:
+    - bundle-install
+    - script:
+        code: |
+          ls -la
+
+deploy:
+  database:
+    - mktemp:
+        envvar: PRIVATEKEY_PATH
+    - create-file:
+        name: write key
+        filename: $PRIVATEKEY_PATH
+        content: $SSH_PRIVATE
+        overwrite: true
+    - script:
+        code: |
+          ls -la
+    - script:
+        cwd: database
+        name: deploy with capistrano
+        code: |
+          cap production deploy

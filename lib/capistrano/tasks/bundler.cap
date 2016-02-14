@@ -1,0 +1,26 @@
+namespace :bundler do
+  desc 'Clean installed bundles'
+  task :clean do
+    on fetch(:bundle_servers) do
+      within release_path do
+        with fetch(:bundle_env_variables, {}) do
+          execute :bundle, 'clean'
+        end
+      end
+    end
+  end
+  before 'deploy:restart', 'bundler:clean'
+end
+
+namespace :load do
+  task :defaults do
+    set :bundle_bins, %w{gem rake rails}
+
+    set :bundle_roles, :all
+    set :bundle_servers, -> { release_roles(fetch(:bundle_roles)) }
+    set :bundle_binstubs, -> { shared_path.join('bin') }
+    set :bundle_path, -> { shared_path.join('bundle') }
+    set :bundle_without, %w{development test}.join(' ')
+    set :bundle_flags, '--deployment --quiet'
+  end
+end
