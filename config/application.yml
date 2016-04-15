@@ -1,6 +1,6 @@
 development:
   RAILS_ENV:                development
-  DATABASE_URL:             postgres://zen:zen@localhost/zena
+  DATABASE_URL:             postgres://pawel@localhost/zena
 
 production:
   RAILS_ENV:                production

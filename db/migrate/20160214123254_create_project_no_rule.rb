@@ -9,7 +9,7 @@ class CreateProjectNoRule < ActiveRecord::Migration
           IF NEW.seq IS NULL THEN
             sequence_name := 'project_no_' || (SELECT nextval('projects_no'));
             create_sequence := 'CREATE SEQUENCE IF NOT EXISTS '
-              || quote_ident(sequence_name) || ' START WITH 1 OWNED BY projects.seq';
+              || quote_ident(sequence_name) || ' START WITH 1';
             EXECUTE create_sequence;
             NEW.seq := sequence_name;
           END IF;

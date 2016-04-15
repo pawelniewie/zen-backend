@@ -177,7 +177,7 @@ where actual.role = member_of.rolname;
   -- can also add restriction that current_setting('postgrest.claims.email')
   -- is equal to email so that user can only see themselves
 
- create or replace function
+create or replace function
 basic_auth.clearance_for_role(u name) returns void as
 $$
 declare
