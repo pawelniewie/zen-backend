@@ -4,7 +4,7 @@ class PostgrestPermissions < ActiveRecord::Migration
 
 create role anon;
 create role author;
-create role authenticator noinherit;
+create role authenticator noinherit login;
 grant anon to authenticator;
 grant author to authenticator;
 
